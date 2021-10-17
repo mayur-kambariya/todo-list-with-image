@@ -1,0 +1,35 @@
+<h1>Listing tasks</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Status</th>
+    <th>Images</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @tasks.each do |task| %>
+  <tr>
+    <td><%= task.title %></td>
+    <td><%= task.description %></td>
+    <td><%= task.status %></td>
+    <td>
+      <% task.images.each do |image| %>
+        <%= image_tag image.file.url, height: 50, width: 50 %>
+      <% end %>
+    </td>
+    <td><%= link_to 'Show', [task.project, task] %></td>
+    <td><%= link_to 'Edit', edit_project_task_path(task.project, task) %></td>
+    <td><%= link_to 'Destroy', [task.project, task], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to "Mark as #{task.status.eql?('done') ? 'Pending' : 'Done'}", mark_as_status_project_task_path(task, project_id: task.project, status: task.status.eql?('done') ? 'pending' : 'done') %></td>
+
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Task', new_project_task_path(params[:project_id]) %>

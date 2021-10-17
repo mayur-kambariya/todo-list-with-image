@@ -1,0 +1,7 @@
+<%= f.label :file %><br />
+<%= f.file_field :file %><br />
+<%= image_tag f&.object&.file&.url, height: 50, width: 50 if f&.object&.file&.url.present? %>
+<%= f.check_box :_destroy %>
+<%= f.label :delete %>
+<br />
+<br />
